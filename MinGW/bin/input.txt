@@ -1,0 +1,92 @@
+programa HelloWorld {{{
+   
+   principal
+   var {
+        carac (c, word[10])
+        int (i, n, mat[5,5], prod)
+        real (numero)
+        logic (booleana, v[4,4])
+   }
+   comandos {
+          /*escrever("Hello World!");
+          
+          ler(mat[3,4], mat[4,5]);*/
+
+
+          mat[3,4] = 10;
+          mat[1,1] = mat[3,4] + 2;
+          /*
+          n = mat[3,5] + mat[3,4];
+          n = mat[3,5] - mat[3,4];
+          n = mat[2,2] + 5 - mat[3,4];
+          n = 2*mat[3,5];
+          n = mat[3,5]*3;
+          n = 2*mat[3,5]*3;
+          n = mat[3,5]/3;
+          n = 2/mat[3,5];
+          n = mat[3,5]%3;
+          n = 3%mat[3,5];
+          */
+
+
+          n = mat[3,4]*2 + 1/mat[3,4] + mat[3,4]%2;
+
+
+
+
+
+          /*escrever(mat[3,4], mat[2,1]);
+
+          v[1,2] = falso;
+          v[1,1] = verdade;
+          se (v[1,2] && v[1,1])
+               c = 'b';
+
+          se (v[1,2] || v[1,1])
+               c = 'y';
+
+          se (v[1,1])
+               c = 'z';
+          
+          enquanto(v[1,1]){
+               escrever("Hi");
+          }
+          
+          repetir{
+               escrever("Aloha");
+          }enquanto(v[1,2] < v[1,1]);
+
+          repetir{
+               escrever("Brasil");
+          }enquanto(v[1,2]);
+
+          n = 15;
+          ler(c);
+          booleana = falso;
+
+          se (booleana){ 
+               se(booleana)
+               {c = 'a'; }
+          }
+          senao { numero = 2.5; } 
+
+          repetir {
+               numero = numero+1;
+          }enquanto (!v[1,1]);
+
+          prod = 1;
+          para i (1;v[1,1] && v[3,4] == 10;i+1) {
+               prod = prod*i;
+          }
+
+          i = 5;
+          escrever("Hello World!");
+
+          se (mat[3,4] > 10)
+               c = 'x';
+          
+          mat[0,10] = 1; */
+
+   }
+
+}}} /* Fim do programa HelloWorld */
