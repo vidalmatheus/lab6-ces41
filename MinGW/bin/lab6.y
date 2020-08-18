@@ -1633,24 +1633,24 @@ void AlocaVariaveis () {
 	simbolo s; int nelemaloc, i, j;
 	printf ("\n\t\tAlocando as variaveis:");
 	for (i = 0; i < NCLASSHASH; i++)
-	       if (tabsimb[i]) {
-	              for (s = tabsimb[i]; s != NULL; s = s->prox){
-	                     if (s->tid == IDVAR) {
-	                            nelemaloc = 1;
-	                            if (s->array)
-	                                   for (j = 1; j <= s->ndims; j++)  nelemaloc *= s->dims[j];
-	                            switch (s->tvar) {
-	                                   case INTEGER:
-	                                          s->valint = malloc (nelemaloc * sizeof (int)); break;
-	                                   case FLOAT:
-	                                          s->valfloat = malloc (nelemaloc * sizeof (float)); break;
-	                                   case CHAR:
-	                                          s->valchar = malloc (nelemaloc * sizeof (char)); break;
-	                                   case LOGICAL:
-	                                          s->vallogic = malloc (nelemaloc * sizeof (char)); break;
-	                           }
-	                           printf ("\n\t\t\t%s: %d elemento(s) alocado(s) ", s->cadeia, nelemaloc);
-	                   }
-	      	 }
-	      }
+        if (tabsimb[i]) {
+            for (s = tabsimb[i]; s != NULL; s = s->prox){
+                if (s->tid == IDVAR) {
+                    nelemaloc = 1;
+                    if (s->array)
+                            for (j = 1; j <= s->ndims; j++)  nelemaloc *= s->dims[j];
+                    switch (s->tvar) {
+                            case INTEGER:
+                                    s->valint = malloc (nelemaloc * sizeof (int)); break;
+                            case FLOAT:
+                                    s->valfloat = malloc (nelemaloc * sizeof (float)); break;
+                            case CHAR:
+                                    s->valchar = malloc (nelemaloc * sizeof (char)); break;
+                            case LOGICAL:
+                                    s->vallogic = malloc (nelemaloc * sizeof (char)); break;
+                    }
+                    printf ("\n\t\t\t%s: %d elemento(s) alocado(s) ", s->cadeia, nelemaloc);
+                }
+            }
+        }
 }
