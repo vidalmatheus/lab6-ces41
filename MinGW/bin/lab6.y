@@ -390,6 +390,7 @@ Prog			:	{InicTabSimb (); InicCodIntermed (); numtemp = 0; indexada = FALSE;}
                     VerificaInicRef ();
                     ImprimeTabSimb ();
                     ImprimeQuadruplas ();
+                    InterpCodIntermed ();
                     }
                 ;
 
@@ -1608,18 +1609,24 @@ void GeraQuadruplaIndex(void){
 
 void InterpCodIntermed () {
 	quadrupla quad, quadprox;  char encerra;
+    modhead p;
 	printf ("\n\nINTERPRETADOR:\n");
 	encerra = FALSE;
-	quad = codintermed->prox->listquad->prox;
-	while (! encerra) {
-		printf ("\n%4d) %s", quad->num, nomeoperquad[quad->oper]);
-		quadprox = quad->prox;
-		switch (quad->oper) {
-			case OPEXIT: encerra = TRUE; break;
-		}
-		if (! encerra) quad = quadprox;
-	}
-	printf ("\n");
+    for (p = modglobal; p!=NULL; p = p->prox){
+        quad = p->listquad->prox;
+        printf("\nModulo %2s:\n", p->modname->cadeia);
+        while (! encerra) {
+            printf ("\n%4d) %s", quad->num, nomeoperquad[quad->oper]);
+            quadprox = quad->prox;
+            switch (quad->oper) {
+                case OPEXIT: encerra = TRUE; break;
+                case OPRETURN: encerra = TRUE; break;
+            }
+            if (! encerra) quad = quadprox;
+        }
+        encerra = FALSE;
+        printf ("\n");
+    }
 }
 
 void AlocaVariaveis () {
