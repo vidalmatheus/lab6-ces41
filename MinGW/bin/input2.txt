@@ -23,14 +23,49 @@ programa CalculaFatorial {{{
     var{
       int (n)
       carac (letra)
+      real (x)
     }
     comandos {
-        escrever ("Numero: ");
-        ler(n);
-        k = 2;
-        n = fatorial(n);
-        ler(letra);
-        chamar Hello(letra);
-        escrever ("Fatorial de ", n, " ", fatorial(n));
+        ler(n, letra);
+        escrever ("n eh ", n, " e letra eh ", letra);
+
+        escrever ("k eh ", k);
+        k = 2-3;
+        escrever ("k eh ", k);
+        k = k+2;
+        escrever ("k eh ", k);
+        k = k/0;
+        escrever ("k eh ", k);
+        k = 0/0;
+        escrever ("k eh ", k);
+        x = 1.0/0;
+        escrever ("x eh ", x);
+
+
+        k = 5%letra;
+        escrever ("k eh ", k);
+        k = 5%2;
+        escrever ("k eh ", k);
+        k = 1%0;
+        escrever ("k eh ", k);
+
+        escrever("1 < 2 eh ", 1<2);
+        escrever("1 <= 2 eh ", 1<=2);
+    
+        escrever("1 > 2 eh ", 1>2);
+        escrever("1 >= 2 eh ", 1>=2);
+
+        escrever("1 == 1 eh ", 1==1);
+        escrever("1 != 2 eh ", 1!=2);
+
+        escrever("!verdade eh ", !verdade);
+        escrever("!falso eh ", !falso);
+
+        escrever("~2 eh ", ~2);
+
+        escrever("verdade && falso ", verdade && falso);
+        escrever("1 < 2 || 1 > 2 ", 1 < 2 || 1 > 2);
+
+        escrever ("Fatorial de ", n);
     }
 }}}
