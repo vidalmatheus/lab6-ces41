@@ -150,7 +150,7 @@ simbolo tabsimb[NCLASSHASH];
 simbolo simb, simb2;
 int tipocorrente;
 int nparams_dec;
-simbolo escopo, escopoGlobal;
+simbolo escopo, escopoGlobal, escopoProg;
 listsimb modParams;
 listsimb listargs;
 int indexada;
@@ -262,7 +262,7 @@ void GeraQuadruplaIndex(void);
 /* Prototipos das funcoes para o interpretador */
 
 void InterpCodIntermed (void);
-void AlocaVariaveis (void);
+void AlocaVariaveis (simbolo);
 void ExecQuadWrite (quadrupla);
 void ExecQuadMais (quadrupla);
 void ExecQuadLT (quadrupla);
@@ -371,7 +371,7 @@ Prog			:	{InicTabSimb (); InicCodIntermed (); numtemp = 0; indexada = FALSE;}
                     {escopo = escopoGlobal = InsereSimb ("##global", IDGLOB, NOTVAR, NULL);} ABTRIP
                     {
                         printf ("programa %s {{{\n", $3);
-                        simb = InsereSimb ($3, IDPROG, NOTVAR, escopo);
+                        escopoProg = simb = InsereSimb ($3, IDPROG, NOTVAR, escopo);
                         InicCodIntermMod (simb);
                         opnd1.tipo = MODOPND;
                         opnd1.atr.modulo = modcorrente;
@@ -1610,18 +1610,25 @@ void GeraQuadruplaIndex(void){
 void InterpCodIntermed () {
 	quadrupla quad, quadprox;  char encerra;
 	char condicao;
-
+    modhead p;
+    simbolo escopo;
 	printf ("\n\nINTERPRETADOR:\n");
+    InicPilhaOpnd (&pilhaopnd);
 	encerra = FALSE;
     for (p = modglobal; p!=NULL; p = p->prox){
         quad = p->listquad->prox;
         printf("\nModulo %2s:\n", p->modname->cadeia);
+        escopo = ProcuraSimb(p->modname->cadeia, escopoGlobal);
+        if (escopo == escopoProg)
+            escopo = escopoGlobal;
         while (! encerra) {
             printf ("\n%4d) %s", quad->num, nomeoperquad[quad->oper]);
             quadprox = quad->prox;
             switch (quad->oper) {
                 case OPEXIT: encerra = TRUE; break;
                 case OPRETURN: encerra = TRUE; break;
+                case OPENMOD:  AlocaVariaveis (escopo); break;
+                case PARAM: EmpilharOpnd (quad->opnd1, &pilhaopnd); break;
             }
             if (! encerra) quad = quadprox;
         }
@@ -1630,13 +1637,13 @@ void InterpCodIntermed () {
     }
 }
 
-void AlocaVariaveis () {
+void AlocaVariaveis (simbolo escopo) {
 	simbolo s; int nelemaloc, i, j;
 	printf ("\n\t\tAlocando as variaveis:");
 	for (i = 0; i < NCLASSHASH; i++)
         if (tabsimb[i]) {
             for (s = tabsimb[i]; s != NULL; s = s->prox){
-                if (s->tid == IDVAR) {
+                if (s->tid == IDVAR && s->escopo == escopo) {
                     nelemaloc = 1;
                     if (s->array)
                             for (j = 1; j <= s->ndims; j++)  nelemaloc *= s->dims[j];
@@ -1705,7 +1712,8 @@ void ExecQuadWrite (quadrupla quad) {
 			case CHAROPND:
 				printf ("%c", opndaux.atr.valchar); break;
 			case LOGICOPND:
-				if (opndaux.atr.vallogic == 1) printf (“VERDADE");
+				if (opndaux.atr.vallogic == 1) 
+                    printf ("VERDADE");
 				else printf ("FALSO");
 				break;
 			case CADOPND:
@@ -1714,17 +1722,16 @@ void ExecQuadWrite (quadrupla quad) {
 				case VAROPND:
 					switch (opndaux.atr.simb->tvar) {
 						case INTEGER:
-							printf ("%d", *(opndaux.atr.simb->valint)); 					break;
+							printf ("%d", *(opndaux.atr.simb->valint)); break;
 						case FLOAT:
-							printf ("%g",
-							     *(opndaux.atr.simb->valfloat));break;
+							printf ("%g", *(opndaux.atr.simb->valfloat)); break;
 						case LOGICAL:
 							if (*(opndaux.atr.simb->vallogic) == 1)
-								printf (“VERDADE");
-								else printf ("FALSO"); break;
+								printf ("VERDADE");
+							else printf ("FALSO"); 
+                            break;
 						case CHAR:
-							printf ("%c",
-							    *(opndaux.atr.simb->valchar)); break;
+							printf ("%c",*(opndaux.atr.simb->valchar)); break;
 					}
 					break;
 			}
