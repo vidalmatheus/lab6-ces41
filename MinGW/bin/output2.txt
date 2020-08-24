@@ -1,0 +1,267 @@
+programa TestaRepeticao {{{
+var {
+int ( k )
+}
+procedimento Hello ( )
+comandos {
+escrever ( "Hello!!!" ) ;
+}
+principal
+var {
+logic ( bool , bool2 )
+}
+comandos {
+escrever ( "verdade && verdade " , verdade && verdade ) ;
+escrever ( "verdade && falso " , verdade && falso ) ;
+bool = 1 > 2 ;
+escrever ( "bool eh " , bool ) ;
+bool2 = 1 < 2 ;
+escrever ( "bool2 eh " , bool2 ) ;
+escrever ( "1 > 2 && 1 > 2 eh " , bool && bool2 ) ;
+bool = 1 > 2 || 1 > 2 ;
+escrever ( "1 > 2 || 1 > 2 " , bool ) ;
+se ( verdade )
+{
+escrever ( "Hello" ) ;
+}
+bool = verdade ;
+enquanto ( bool )
+{
+escrever ( "Entrei no enquanto" ) ;
+bool = falso ;
+}
+bool = verdade ;
+repetir {
+escrever ( "Entrei no repetir" ) ;
+bool = falso ;
+}
+enquanto ( bool ) ;
+chamar Hello () ;
+escrever ( "Hello!!!" ) ;
+}
+}}}
+
+[    ##global]          k:   Nao Inicializada
+[    ##global]          k:   Nao Referenciada
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 4:
+  (##1, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 5:
+  (##2, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##global, IDGLOB)
+Classe 6:
+  (##3, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 7:
+  (##4, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 8:
+  (##5, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 9:
+  (##6, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 10:
+  (##7, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 11:
+  (##8, IDVAR, LOGICAL, 1, 1, ##principal)
+  (TestaRepeticao, IDPROG, ##global)
+Classe 12:
+  (##9, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 14:
+  (bool, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 15:
+  (k, IDVAR, INTEGER, 0, 0, ##global)
+Classe 17:
+  (Hello, IDPROC, ##global)
+Classe 18:
+  (bool2, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 20:
+  (##principal, IDPRINCIPAL, ##global)
+
+
+Quadruplas do modulo TestaRepeticao:
+
+	   1) OPENMOD, (MODULO, TestaRepeticao), (IDLE), (IDLE)
+	   2) OPCALL, (FUNCAO, ##principal), (IDLE), (IDLE)
+	   3) EXIT, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo Hello:
+
+	   1) OPENMOD, (PROCEDIMENTO, Hello), (IDLE), (IDLE)
+	   2) PARAM, (CADEIA, Hello!!!), (IDLE), (IDLE)
+	   3) WRITE, (INT, 1), (IDLE), (IDLE)
+	   4) OPRETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo ##principal:
+
+	   1) OPENMOD, (FUNCAO, ##principal), (IDLE), (IDLE)
+	   2) PARAM, (CADEIA, verdade && verdade ), (IDLE), (IDLE)
+	   3) AND, (LOGIC, 1), (LOGIC, 1), (VAR, ##1)
+	   4) PARAM, (VAR, ##1), (IDLE), (IDLE)
+	   5) WRITE, (INT, 2), (IDLE), (IDLE)
+	   6) PARAM, (CADEIA, verdade && falso ), (IDLE), (IDLE)
+	   7) AND, (LOGIC, 1), (LOGIC, 0), (VAR, ##2)
+	   8) PARAM, (VAR, ##2), (IDLE), (IDLE)
+	   9) WRITE, (INT, 2), (IDLE), (IDLE)
+	  10) GT, (INT, 1), (INT, 2), (VAR, ##3)
+	  11) ATRIB, (VAR, ##3), (IDLE), (VAR, bool)
+	  12) PARAM, (CADEIA, bool eh ), (IDLE), (IDLE)
+	  13) PARAM, (VAR, bool), (IDLE), (IDLE)
+	  14) WRITE, (INT, 2), (IDLE), (IDLE)
+	  15) LT, (INT, 1), (INT, 2), (VAR, ##4)
+	  16) ATRIB, (VAR, ##4), (IDLE), (VAR, bool2)
+	  17) PARAM, (CADEIA, bool2 eh ), (IDLE), (IDLE)
+	  18) PARAM, (VAR, bool2), (IDLE), (IDLE)
+	  19) WRITE, (INT, 2), (IDLE), (IDLE)
+	  20) PARAM, (CADEIA, 1 > 2 && 1 > 2 eh ), (IDLE), (IDLE)
+	  21) AND, (VAR, bool), (VAR, bool2), (VAR, ##5)
+	  22) PARAM, (VAR, ##5), (IDLE), (IDLE)
+	  23) WRITE, (INT, 2), (IDLE), (IDLE)
+	  24) GT, (INT, 1), (INT, 2), (VAR, ##6)
+	  25) GT, (INT, 1), (INT, 2), (VAR, ##7)
+	  26) OR, (VAR, ##6), (VAR, ##7), (VAR, ##8)
+	  27) ATRIB, (VAR, ##8), (IDLE), (VAR, bool)
+	  28) PARAM, (CADEIA, 1 > 2 || 1 > 2 ), (IDLE), (IDLE)
+	  29) PARAM, (VAR, bool), (IDLE), (IDLE)
+	  30) WRITE, (INT, 2), (IDLE), (IDLE)
+	  31) JF, (LOGIC, 1), (IDLE), (ROTULO, 34)
+	  32) PARAM, (CADEIA, Hello), (IDLE), (IDLE)
+	  33) WRITE, (INT, 1), (IDLE), (IDLE)
+	  34) NOP, (IDLE), (IDLE), (IDLE)
+	  35) ATRIB, (LOGIC, 1), (IDLE), (VAR, bool)
+	  36) NOP, (IDLE), (IDLE), (IDLE)
+	  37) JF, (VAR, bool), (IDLE), (ROTULO, 42)
+	  38) PARAM, (CADEIA, Entrei no enquanto), (IDLE), (IDLE)
+	  39) WRITE, (INT, 1), (IDLE), (IDLE)
+	  40) ATRIB, (LOGIC, 0), (IDLE), (VAR, bool)
+	  41) JUMP, (IDLE), (IDLE), (ROTULO, 36)
+	  42) NOP, (IDLE), (IDLE), (IDLE)
+	  43) ATRIB, (LOGIC, 1), (IDLE), (VAR, bool)
+	  44) NOP, (IDLE), (IDLE), (IDLE)
+	  45) PARAM, (CADEIA, Entrei no repetir), (IDLE), (IDLE)
+	  46) WRITE, (INT, 1), (IDLE), (IDLE)
+	  47) ATRIB, (LOGIC, 0), (IDLE), (VAR, bool)
+	  48) JF, (VAR, bool), (IDLE), (ROTULO, 44)
+	  49) OPCALL, (PROCEDIMENTO, Hello), (INT, 1), (VAR, ##9)
+	  50) PARAM, (CADEIA, Hello!!!), (IDLE), (IDLE)
+	  51) WRITE, (INT, 1), (IDLE), (IDLE)
+	  52) OPRETURN, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+Modulo TestaRepeticao:
+
+   1) OPENMOD
+		Alocando as variaveis:
+			k: 1 elemento(s) alocado(s) 
+   2) OPCALL
+   3) EXIT
+
+Modulo Hello:
+
+   1) OPENMOD
+		Alocando as variaveis:
+   2) PARAM
+   3) WRITE
+		Escrevendo: 
+			Hello!!!
+
+   4) OPRETURN
+
+Modulo ##principal:
+
+   1) OPENMOD
+		Alocando as variaveis:
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			##5: 1 elemento(s) alocado(s) 
+			##6: 1 elemento(s) alocado(s) 
+			##7: 1 elemento(s) alocado(s) 
+			##8: 1 elemento(s) alocado(s) 
+			##9: 1 elemento(s) alocado(s) 
+			bool: 1 elemento(s) alocado(s) 
+			bool2: 1 elemento(s) alocado(s) 
+   2) PARAM
+   3) AND
+   4) PARAM
+   5) WRITE
+		Escrevendo: 
+			verdade && verdade VERDADE
+
+   6) PARAM
+   7) AND
+   8) PARAM
+   9) WRITE
+		Escrevendo: 
+			verdade && falso FALSO
+
+  10) GT
+  11) ATRIB
+  12) PARAM
+  13) PARAM
+  14) WRITE
+		Escrevendo: 
+			bool eh FALSO
+
+  15) LT
+  16) ATRIB
+  17) PARAM
+  18) PARAM
+  19) WRITE
+		Escrevendo: 
+			bool2 eh VERDADE
+
+  20) PARAM
+  21) AND
+  22) PARAM
+  23) WRITE
+		Escrevendo: 
+			1 > 2 && 1 > 2 eh FALSO
+
+  24) GT
+  25) GT
+  26) OR
+  27) ATRIB
+  28) PARAM
+  29) PARAM
+  30) WRITE
+		Escrevendo: 
+			1 > 2 || 1 > 2 FALSO
+
+  31) JF
+  32) PARAM
+  33) WRITE
+		Escrevendo: 
+			Hello
+
+  34) NOP
+  35) ATRIB
+  36) NOP
+  37) JF
+  38) PARAM
+  39) WRITE
+		Escrevendo: 
+			Entrei no enquanto
+
+  40) ATRIB
+  41) JUMP
+  42) NOP
+  43) ATRIB
+  44) NOP
+  45) PARAM
+  46) WRITE
+		Escrevendo: 
+			Entrei no repetir
+
+  47) ATRIB
+  48) JF
+  49) OPCALL
+  50) PARAM
+  51) WRITE
+		Escrevendo: 
+			Hello!!!
+
+  52) OPRETURN
