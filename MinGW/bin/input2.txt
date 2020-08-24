@@ -1,4 +1,4 @@
-programa CalculaFatorial {{{
+programa TestaRepeticao {{{
 
     var { int (k) }
 
