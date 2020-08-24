@@ -8,65 +8,13 @@ programa CalculaFatorial {{{
 
     } /* fim do procedimento Hello */
 
-
-    funcao int fatorial (int n)
-    var {int (i,prod)}
-    comandos {
-        prod = 1;
-        para i (1;i<=n;i+1)
-            prod = prod*i;
-
-        retornar prod;
-    }
-
     principal
     var{
-      int (n)
-      carac (letra)
-      real (x)
       logic (bool, bool2)
     }
     comandos {
-        ler(n, letra);
-        escrever ("n eh ", n, " e letra eh ", letra);
-
-        escrever ("k eh ", k);
-        k = 2+3;
-        escrever ("k eh ", k);
-        k = 3*2*k + k;
-        escrever ("k eh ", k);
-        k = k/0;
-        escrever ("k eh ", k);
-        k = 0/0;
-        escrever ("k eh ", k);
-        x = 1.0/0;
-        escrever ("x eh ", x);
-
-
-        k = 5%letra;
-        escrever ("k eh ", k);
-        k = 5%2;
-        escrever ("k eh ", k);
-        k = 1%0;
-        escrever ("k eh ", k);
-
-        escrever("1 < 2 eh ", 1<2);
-        escrever("1 <= 2 eh ", 1<=2);
-    
-        escrever("1 > 2 eh ", 1>2);
-        escrever("1 >= 2 eh ", 1>=2);
-
-        escrever("1 == 1 eh ", 1==1);
-        escrever("1 != 2 eh ", 1!=2);
-
-        escrever("!verdade eh ", !verdade);
-        escrever("!(1>2) eh ", !(1>2));
-
-        escrever("~2 eh ", ~2);
-
         escrever("verdade && verdade ", verdade && verdade);
         escrever("verdade && falso ", verdade && falso);
-
 
         bool = 1 > 2;
         escrever ("bool eh ", bool);
@@ -96,6 +44,5 @@ programa CalculaFatorial {{{
 
         chamar Hello();
         escrever("Hello!!!");
-        escrever ("Fatorial de ", n);
     }
 }}}

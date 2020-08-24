@@ -1,26 +1,66 @@
-programa HelloWorld {{{
-   
-   principal
-   var {
-        int (n, mat[5,5])
-   }
-   comandos {
-          escrever("Hello World!");
-     
-          mat[3,4] = 10;
-          mat[1,1] = mat[3,4] + 2;
-          n = mat[3,5] + mat[3,4];
-          n = mat[3,5] - mat[3,4];
-          n = mat[2,2] + 5 - mat[3,4];
-          n = 2*mat[3,5];
-          n = mat[3,5]*3;
-          n = 2*mat[3,5]*3;
-          n = mat[3,5]/3;
-          n = 2/mat[3,5];
-          n = mat[3,5]%3;
-          n = 3%mat[3,5];
-          n = mat[3,4]*2 + 1/mat[3,4] + mat[3,4]%2;
+programa CalculaFatorial {{{
 
-   }
+    var { int (k) }
 
-}}} /* Fim do programa HelloWorld */
+    procedimento Hello ()
+    comandos {
+            escrever ("Hello!!!");
+
+    } /* fim do procedimento Hello */
+
+
+    funcao int fatorial (int n)
+    var {int (i,prod)}
+    comandos {
+        prod = 1;
+        para i (1;i<=n;i+1)
+            prod = prod*i;
+
+        retornar prod;
+    }
+
+    principal
+    var{
+      int (n)
+      carac (letra)
+      real (x)
+    }
+    comandos {
+        ler(n, letra);
+        escrever ("n eh ", n, " e letra eh ", letra);
+
+        escrever ("k eh ", k);
+        k = 2+3;
+        escrever ("k eh ", k);
+        k = 3*2*k + k;
+        escrever ("k eh ", k);
+        k = k/0;
+        escrever ("k eh ", k);
+        k = 0/0;
+        escrever ("k eh ", k);
+        x = 1.0/0;
+        escrever ("x eh ", x);
+
+
+        k = 5%letra;
+        escrever ("k eh ", k);
+        k = 5%2;
+        escrever ("k eh ", k);
+        k = 1%0;
+        escrever ("k eh ", k);
+
+        escrever("1 < 2 eh ", 1<2);
+        escrever("1 <= 2 eh ", 1<=2);
+    
+        escrever("1 > 2 eh ", 1>2);
+        escrever("1 >= 2 eh ", 1>=2);
+
+        escrever("1 == 1 eh ", 1==1);
+        escrever("1 != 2 eh ", 1!=2);
+
+        escrever("!verdade eh ", !verdade);
+        escrever("!(1>2) eh ", !(1>2));
+
+        escrever("~2 eh ", ~2);
+    }
+}}}
