@@ -40,8 +40,8 @@
 
 /* Definicao de constantes para os operadores de quadruplas */
 
-#define		OPOR			1 // checar
-#define		OPAND	 		2 // checar
+#define		OPOR			1 // ok
+#define		OPAND	 		2 // ok
 #define 	OPLT	 		3 // ok
 #define 	OPLE	 		4 // ok
 #define		OPGT		    5 // ok
@@ -59,7 +59,7 @@
 #define		OPENMOD		   17
 #define		NOP			   18 // ok
 #define		OPJUMP		   19
-#define		OPJF		   20
+#define		OPJF		   20 // ok
 #define     PARAM          21
 #define     OPREAD         22 // ok
 #define     OPWRITE        23 // ok
@@ -221,7 +221,7 @@ struct celmodhead {
 quadrupla quadcorrente, quadaux, quadaux2;
 modhead codintermed, modcorrente, modglobal, modaux;
 int oper, numquadcorrente;
-operando opnd1, opnd2, result, opndaux, opndaux2, opndaux3;
+operando opnd1, opnd2, result, opndaux, opndaux2, opndaux3, opndaux4;
 int numtemp;
 const operando opndidle = {IDLEOPND, 0};
 
@@ -1088,7 +1088,7 @@ Termo  	    	:   Fator
                         }
                     }  Fator  {
                         switch ($2) {
-                            case MULT: case DIV:
+                            case MULT: 
                                 if ($1.tipo != INTEGER && $1.tipo != FLOAT && $1.tipo != CHAR
                                     || $4.tipo != INTEGER && $4.tipo != FLOAT && $4.tipo != CHAR)
                                     Incompatibilidade ("Operando improprio para operador aritmetico");
@@ -1096,30 +1096,35 @@ Termo  	    	:   Fator
                                 else $$.tipo = INTEGER;
                                 $$.opnd.tipo = VAROPND;
                                 $$.opnd.atr.simb = NovaTemp ($$.tipo, escopo);
-                                if ($2 == MULT){
-                                    if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo == INDEXOPND){
-                                        GeraQuadrupla (OPMULTIP, opndaux2, result, $$.opnd);
-                                    }
-                                    else if ($1.opnd.tipo != INDEXOPND && $4.opnd.tipo == INDEXOPND){
-                                        GeraQuadrupla (OPMULTIP, $1.opnd, result, $$.opnd);
-                                    }
-                                    else if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo != INDEXOPND){
-                                        GeraQuadrupla (OPMULTIP, opndaux2, $4.opnd, $$.opnd);
-                                    }
-                                    else GeraQuadrupla (OPMULTIP, $1.opnd, $4.opnd, $$.opnd);
+                                if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo == INDEXOPND){
+                                    GeraQuadrupla (OPMULTIP, opndaux2, result, $$.opnd);
                                 }
-                                else {
-                                     if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo == INDEXOPND){
-                                        GeraQuadrupla (OPDIV, opndaux2, result, $$.opnd);
-                                    }
-                                    else if ($1.opnd.tipo != INDEXOPND && $4.opnd.tipo == INDEXOPND){
-                                        GeraQuadrupla (OPDIV, $1.opnd, result, $$.opnd);
-                                    }
-                                    else if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo != INDEXOPND){
-                                        GeraQuadrupla (OPDIV, opndaux2, $4.opnd, $$.opnd);
-                                    }
-                                    else GeraQuadrupla (OPDIV, $1.opnd, $4.opnd, $$.opnd);
+                                else if ($1.opnd.tipo != INDEXOPND && $4.opnd.tipo == INDEXOPND){
+                                    GeraQuadrupla (OPMULTIP, $1.opnd, result, $$.opnd);
                                 }
+                                else if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo != INDEXOPND){
+                                    GeraQuadrupla (OPMULTIP, opndaux2, $4.opnd, $$.opnd);
+                                }
+                                else GeraQuadrupla (OPMULTIP, $1.opnd, $4.opnd, $$.opnd);
+                                break;
+                            case DIV:
+                                if ($1.tipo != INTEGER && $1.tipo != FLOAT && $1.tipo != CHAR
+                                    || $4.tipo != INTEGER && $4.tipo != FLOAT && $4.tipo != CHAR)
+                                    Incompatibilidade ("Operando improprio para operador aritmetico");
+                                if ($1.tipo == FLOAT || $4.tipo == FLOAT) $$.tipo = FLOAT;
+                                else $$.tipo = INTEGER;
+                                $$.opnd.tipo = VAROPND;
+                                $$.opnd.atr.simb = NovaTemp ($$.tipo, escopo);
+                                if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo == INDEXOPND){
+                                    GeraQuadrupla (OPDIV, opndaux2, result, $$.opnd);
+                                }
+                                else if ($1.opnd.tipo != INDEXOPND && $4.opnd.tipo == INDEXOPND){
+                                    GeraQuadrupla (OPDIV, $1.opnd, result, $$.opnd);
+                                }
+                                else if ($1.opnd.tipo == INDEXOPND && $4.opnd.tipo != INDEXOPND){
+                                    GeraQuadrupla (OPDIV, opndaux2, $4.opnd, $$.opnd);
+                                }
+                                else GeraQuadrupla (OPDIV, $1.opnd, $4.opnd, $$.opnd);
                                 break;
                             case RESTO:
                                 if ($1.tipo != INTEGER && $1.tipo != CHAR
@@ -1629,8 +1634,9 @@ void GeraQuadruplaIndex(void){
 
 void InterpCodIntermed () {
     finput = fopen ("entrada2020", "r");
-	quadrupla quad, quadprox;  char encerra;
+	quadrupla quad, quadprox, quadinicio;  char encerra;
 	char condicao;
+    char branch = FALSE;
     modhead p;
     simbolo escopo;
 	printf ("\n\nINTERPRETADOR:\n");
@@ -1654,7 +1660,7 @@ void InterpCodIntermed () {
                 case OPATRIB:  ExecQuadAtrib (quad);  break;
                 case OPMAIS:  ExecQuadMais (quad);  break;
                 case OPMENOS:  ExecQuadMenos (quad);  break;
-                case OPMULT:  ExecQuadMult (quad);  break;
+                case OPMULTIP:  ExecQuadMult (quad);  break;
                 case OPDIV:  ExecQuadDiv (quad);  break;
                 case OPRESTO:  ExecQuadResto (quad);  break;
                 case OPLT:  ExecQuadLT (quad); break;
@@ -1668,6 +1674,17 @@ void InterpCodIntermed () {
                 case OPOR:  ExecQuadOR (quad); break;
                 case OPAND:  ExecQuadAND (quad); break;
                 case  OPREAD:   ExecQuadRead (quad);  break;
+                case OPJF: 
+                        if (!quad->opnd1.atr.vallogic){
+                            while (quad->oper != NOP){
+                                quad = quadprox;
+                                quadprox = quadprox->prox;
+                            }
+
+                            quadprox = quadprox->prox;
+                        }
+                        break;
+                
             }
             if (! encerra) quad = quadprox;
         }
@@ -2456,19 +2473,92 @@ void ExecQuadNE (quadrupla quad) {
 }
 
 void ExecQuadNOT (quadrupla quad){
-    *(quad->result.atr.simb->vallogic) = !quad->opnd1.atr.vallogic;
+	int tipo1, tipo2, valint1, valint2;
+    char vallogic1, vallogic2;
+    switch (quad->opnd1.tipo) {
+        case LOGICOPND:
+            tipo1 = LOGICOPND; vallogic1=quad->opnd1.atr.vallogic;break;
+        case VAROPND:
+            switch (quad->opnd1.atr.simb->tvar) {
+                case LOGIC:  tipo1 = LOGICOPND;
+                    vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+                    break;
+            }
+            break;
+    }
+	*(quad->result.atr.simb->vallogic) = !vallogic1;
 }
 
 void ExecQuadMENUN (quadrupla quad){
-    *(quad->result.atr.simb->valint) = ~quad->opnd1.atr.valint;
+	int tipo1, tipo2, valint1, valint2;
+    switch (quad->opnd1.tipo) {
+        case INTOPND:
+            tipo1 = INTOPND; valint1=quad->opnd1.atr.valint;break;
+        case VAROPND:
+            switch (quad->opnd1.atr.simb->tvar) {
+                case INTEGER:  tipo1 = INTOPND;
+                    valint1 = *(quad->opnd1.atr.simb->valint);
+                    break;
+            }
+            break;
+    }
+	*(quad->result.atr.simb->valint) = ~valint1;
 }
 
-void ExecQuadOR (quadrupla quad){ //checar
-    *(quad->result.atr.simb->vallogic) = quad->opnd1.atr.vallogic || quad->opnd2.atr.vallogic;
+void ExecQuadOR (quadrupla quad){ 
+	int tipo1, tipo2, valint1, valint2;
+    char vallogic1, vallogic2;
+    switch (quad->opnd1.tipo) {
+        case LOGICOPND:
+            tipo1 = LOGICOPND; vallogic1=quad->opnd1.atr.vallogic;break;
+        case VAROPND:
+            switch (quad->opnd1.atr.simb->tvar) {
+                case LOGIC:  tipo1 = LOGICOPND;
+                    vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+                    break;
+            }
+            break;
+    }
+    switch (quad->opnd2.tipo) {
+        case LOGICOPND:
+            tipo2 = LOGICOPND; vallogic2=quad->opnd2.atr.vallogic;break;
+        case VAROPND:
+            switch (quad->opnd2.atr.simb->tvar) {
+                case LOGIC:  tipo2 = LOGICOPND;
+                    vallogic2 = *(quad->opnd2.atr.simb->vallogic);
+                    break;
+            }
+            break;
+    }
+	*(quad->result.atr.simb->vallogic) = vallogic1 || vallogic2;
 }
 
-void ExecQuadAND (quadrupla quad){ //checar
-    *(quad->result.atr.simb->vallogic) = quad->opnd1.atr.vallogic && quad->opnd2.atr.vallogic;
+void ExecQuadAND (quadrupla quad){ 
+	int tipo1, tipo2, valint1, valint2;
+    char vallogic1, vallogic2;
+    switch (quad->opnd1.tipo) {
+        case LOGICOPND:
+            tipo1 = LOGICOPND; vallogic1=quad->opnd1.atr.vallogic;break;
+        case VAROPND:
+            switch (quad->opnd1.atr.simb->tvar) {
+                case LOGIC:  tipo1 = LOGICOPND;
+                    vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+                    break;
+            }
+            break;
+    }
+    switch (quad->opnd2.tipo) {
+        case LOGICOPND:
+            tipo2 = LOGICOPND; vallogic2=quad->opnd2.atr.vallogic;break;
+        case VAROPND:
+            switch (quad->opnd2.atr.simb->tvar) {
+                case LOGIC:  tipo2 = LOGICOPND;
+                    vallogic2 = *(quad->opnd2.atr.simb->vallogic);
+                    break;
+            }
+            break;
+    }
+	*(quad->result.atr.simb->vallogic) = vallogic1 && vallogic2;
 }
 
 void ExecQuadRead (quadrupla quad) {

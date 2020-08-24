@@ -2,9 +2,9 @@ programa CalculaFatorial {{{
 
     var { int (k) }
 
-    procedimento Hello (carac nome)
+    procedimento Hello ()
     comandos {
-            escrever ("Hello, ", nome);
+            escrever ("Hello!!!");
 
     } /* fim do procedimento Hello */
 
@@ -24,15 +24,16 @@ programa CalculaFatorial {{{
       int (n)
       carac (letra)
       real (x)
+      logic (bool, bool2)
     }
     comandos {
         ler(n, letra);
         escrever ("n eh ", n, " e letra eh ", letra);
 
         escrever ("k eh ", k);
-        k = 2-3;
+        k = 2+3;
         escrever ("k eh ", k);
-        k = k+2;
+        k = 3*2*k + k;
         escrever ("k eh ", k);
         k = k/0;
         escrever ("k eh ", k);
@@ -59,13 +60,42 @@ programa CalculaFatorial {{{
         escrever("1 != 2 eh ", 1!=2);
 
         escrever("!verdade eh ", !verdade);
-        escrever("!falso eh ", !falso);
+        escrever("!(1>2) eh ", !(1>2));
 
         escrever("~2 eh ", ~2);
 
+        escrever("verdade && verdade ", verdade && verdade);
         escrever("verdade && falso ", verdade && falso);
-        escrever("1 < 2 || 1 > 2 ", 1 < 2 || 1 > 2);
 
+
+        bool = 1 > 2;
+        escrever ("bool eh ", bool);
+        bool2 = 1 < 2;
+        escrever ("bool2 eh ", bool2);
+
+        escrever ("1 > 2 && 1 > 2 eh ", bool && bool2);
+
+        bool = 1 > 2 || 1 > 2;
+        escrever("1 > 2 || 1 > 2 ", bool);
+
+        se (verdade){
+            escrever("Hello");
+        }
+
+        bool = verdade;
+        enquanto (bool){
+            escrever("Entrei no enquanto");
+            bool = falso;
+        }
+
+        bool = verdade;
+        repetir{
+            escrever("Entrei no repetir");
+            bool = falso;
+        }enquanto(bool);
+
+        chamar Hello();
+        escrever("Hello!!!");
         escrever ("Fatorial de ", n);
     }
 }}}
