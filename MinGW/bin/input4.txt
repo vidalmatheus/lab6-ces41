@@ -1,18 +1,19 @@
 programa VerificaDivisor {{{
-    funcao logic ehDivisor (int d, int n)
-    comandos {
-        se (d%n == 0)
-            retornar verdade;
-        senao retornar falso;
-    } /* fim da funcao ehDivisor */
-
     principal
-    var { int(d,n) }
+    var { int(d,n,resto)}
     comandos {
         escrever ("Numero: ");
         ler(n);
+        escrever("n eh ", n);
         escrever ("Possivel divisor: ");
         ler(d);
-        escrever (ehDivisor(d,n));
+        escrever("d eh ", d);
+        resto = n%2;
+        escrever("resto eh : ", resto);
+        se (resto != 0){
+            escrever(falso);
+            retornar;
+        }
+        escrever(verdade);
     }
 }}}
