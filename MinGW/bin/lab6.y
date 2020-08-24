@@ -40,30 +40,30 @@
 
 /* Definicao de constantes para os operadores de quadruplas */
 
-#define		OPOR			1 // ok
-#define		OPAND	 		2 // ok
-#define 	OPLT	 		3 // ok
-#define 	OPLE	 		4 // ok
-#define		OPGT		    5 // ok
-#define		OPGE			6 // ok
-#define		OPEQ			7 // ok
-#define		OPNE			8 // ok
-#define		OPMAIS		    9 // ok
-#define		OPMENOS		   10 // ok
-#define		OPMULTIP	   11 // ok
-#define		OPDIV		   12 // ok
-#define		OPRESTO		   13 // ok
-#define		OPMENUN		   14 // ok
-#define		OPNOT		   15 // ok
-#define		OPATRIB		   16 // ok
+#define		OPOR			1
+#define		OPAND	 		2
+#define 	OPLT	 		3
+#define 	OPLE	 		4
+#define		OPGT		    5
+#define		OPGE			6
+#define		OPEQ			7
+#define		OPNE			8
+#define		OPMAIS		    9
+#define		OPMENOS		   10
+#define		OPMULTIP	   11
+#define		OPDIV		   12
+#define		OPRESTO		   13
+#define		OPMENUN		   14
+#define		OPNOT		   15
+#define		OPATRIB		   16
 #define		OPENMOD		   17
-#define		NOP			   18 // ok
+#define		NOP			   18
 #define		OPJUMP		   19
-#define		OPJF		   20 // ok
+#define		OPJF		   20
 #define     PARAM          21
-#define     OPREAD         22 // ok
-#define     OPWRITE        23 // ok
-#define		OPEXIT		   24 // ok
+#define     OPREAD         22
+#define     OPWRITE        23
+#define		OPEXIT		   24
 #define     OPCALL         25
 #define     OPRETURN       26 
 #define     IND            27
