@@ -1,0 +1,462 @@
+programa TestaExpressoes {{{
+var {
+int ( k )
+}
+procedimento Hello ( )
+comandos {
+escrever ( "Hello!!!" ) ;
+}
+funcao int fatorial ( int n )
+var {
+int ( i , prod )
+}
+comandos {
+prod = 1 ;
+para i ( 1 ; i <= n ; i + 1 ) 
+prod = prod * i ;
+retornar prod ;
+}
+principal
+var {
+int ( n )
+carac ( letra )
+real ( x )
+}
+comandos {
+ler ( n , letra ) ;
+escrever ( "n eh " , n , " e letra eh " , letra ) ;
+escrever ( "k eh " , k ) ;
+k = 2 + 3 ;
+escrever ( "k eh " , k ) ;
+k = 3 * 2 * k + k ;
+escrever ( "k eh " , k ) ;
+k = k / 0 ;
+escrever ( "k eh " , k ) ;
+k = 0 / 0 ;
+escrever ( "k eh " , k ) ;
+x = 1 / 0 ;
+escrever ( "x eh " , x ) ;
+k = 5 % letra ;
+escrever ( "k eh " , k ) ;
+k = 5 % 2 ;
+escrever ( "k eh " , k ) ;
+k = 1 % 0 ;
+escrever ( "k eh " , k ) ;
+escrever ( "1 < 2 eh " , 1 < 2 ) ;
+escrever ( "1 <= 2 eh " , 1 <= 2 ) ;
+escrever ( "1 > 2 eh " , 1 > 2 ) ;
+escrever ( "1 >= 2 eh " , 1 >= 2 ) ;
+escrever ( "1 == 1 eh " , 1 == 1 ) ;
+escrever ( "1 != 2 eh " , 1 != 2 ) ;
+escrever ( "!verdade eh " , ! verdade ) ;
+escrever ( "!(1>2) eh " , ! ( 1 > 2 ) ) ;
+escrever ( "~2 eh " , ~ 2 ) ;
+}
+}}}
+
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 0:
+  (prod, IDVAR, INTEGER, 1, 1, fatorial)
+Classe 4:
+  (##1, IDVAR, LOGICAL, 1, 1, fatorial)
+Classe 5:
+  (x, IDVAR, FLOAT, 1, 1, ##principal)
+  (##2, IDVAR, INTEGER, 1, 1, fatorial)
+  (##global, IDGLOB)
+Classe 6:
+  (##10, IDVAR, FLOAT, 1, 1, ##principal)
+  (##3, IDVAR, INTEGER, 1, 1, fatorial)
+Classe 7:
+  (##20, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##11, IDVAR, INTEGER, 1, 1, ##principal)
+  (##4, IDVAR, INTEGER, 1, 1, ##principal)
+  (letra, IDVAR, CHAR, 1, 1, ##principal)
+Classe 8:
+  (##21, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##12, IDVAR, INTEGER, 1, 1, ##principal)
+  (##5, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 9:
+  (##22, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##13, IDVAR, INTEGER, 1, 1, ##principal)
+  (##6, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 10:
+  (##23, IDVAR, INTEGER, 1, 1, ##principal)
+  (##14, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##7, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 11:
+  (##15, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##8, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 12:
+  (##16, IDVAR, LOGICAL, 1, 1, ##principal)
+  (##9, IDVAR, INTEGER, 1, 1, ##principal)
+Classe 13:
+  (##17, IDVAR, LOGICAL, 1, 1, ##principal)
+  (i, IDVAR, INTEGER, 1, 1, fatorial)
+Classe 14:
+  (##18, IDVAR, LOGICAL, 1, 1, ##principal)
+Classe 15:
+  (##19, IDVAR, LOGICAL, 1, 1, ##principal)
+  (k, IDVAR, INTEGER, 1, 1, ##global)
+Classe 17:
+  (Hello, IDPROC, ##global)
+Classe 18:
+  (n, IDVAR, INTEGER, 1, 1, ##principal)
+  (n, IDVAR, INTEGER, 1, 1, fatorial)
+Classe 20:
+  (##principal, IDPRINCIPAL, ##global)
+Classe 22:
+  (fatorial, IDFUNC, INTEGER, ##global)
+  (TestaExpressoes, IDPROG, ##global)
+
+
+Quadruplas do modulo TestaExpressoes:
+
+	   1) OPENMOD, (MODULO, TestaExpressoes), (IDLE), (IDLE)
+	   2) OPCALL, (FUNCAO, ##principal), (IDLE), (IDLE)
+	   3) EXIT, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo Hello:
+
+	   1) OPENMOD, (PROCEDIMENTO, Hello), (IDLE), (IDLE)
+	   2) PARAM, (CADEIA, Hello!!!), (IDLE), (IDLE)
+	   3) WRITE, (INT, 1), (IDLE), (IDLE)
+	   4) OPRETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo fatorial:
+
+	   1) OPENMOD, (FUNCAO, fatorial), (IDLE), (IDLE)
+	   2) ATRIB, (INT, 1), (IDLE), (VAR, prod)
+	   3) PARAM, (INT, 1), (IDLE), (IDLE)
+	   4) NOP, (IDLE), (IDLE), (IDLE)
+	   5) LE, (VAR, i), (VAR, n), (VAR, ##1)
+	   6) JF, (VAR, ##1), (IDLE), (ROTULO, 13)
+	   7) NOP, (IDLE), (IDLE), (IDLE)
+	   8) MULT, (VAR, prod), (VAR, i), (VAR, ##3)
+	   9) ATRIB, (VAR, ##3), (IDLE), (VAR, prod)
+	  10) NOP, (IDLE), (IDLE), (IDLE)
+	  11) MAIS, (VAR, i), (INT, 1), (VAR, ##2)
+	  12) JUMP, (IDLE), (IDLE), (ROTULO, 4)
+	  13) NOP, (IDLE), (IDLE), (IDLE)
+	  14) OPRETURN, (VAR, prod), (IDLE), (IDLE)
+
+Quadruplas do modulo ##principal:
+
+	   1) OPENMOD, (FUNCAO, ##principal), (IDLE), (IDLE)
+	   2) PARAM, (VAR, n), (IDLE), (IDLE)
+	   3) PARAM, (VAR, letra), (IDLE), (IDLE)
+	   4) READ, (INT, 2), (IDLE), (IDLE)
+	   5) PARAM, (CADEIA, n eh ), (IDLE), (IDLE)
+	   6) PARAM, (VAR, n), (IDLE), (IDLE)
+	   7) PARAM, (CADEIA,  e letra eh ), (IDLE), (IDLE)
+	   8) PARAM, (VAR, letra), (IDLE), (IDLE)
+	   9) WRITE, (INT, 4), (IDLE), (IDLE)
+	  10) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  11) PARAM, (VAR, k), (IDLE), (IDLE)
+	  12) WRITE, (INT, 2), (IDLE), (IDLE)
+	  13) MAIS, (INT, 2), (INT, 3), (VAR, ##4)
+	  14) ATRIB, (VAR, ##4), (IDLE), (VAR, k)
+	  15) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  16) PARAM, (VAR, k), (IDLE), (IDLE)
+	  17) WRITE, (INT, 2), (IDLE), (IDLE)
+	  18) MULT, (INT, 3), (INT, 2), (VAR, ##5)
+	  19) MULT, (VAR, ##5), (VAR, k), (VAR, ##6)
+	  20) MAIS, (VAR, ##6), (VAR, k), (VAR, ##7)
+	  21) ATRIB, (VAR, ##7), (IDLE), (VAR, k)
+	  22) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  23) PARAM, (VAR, k), (IDLE), (IDLE)
+	  24) WRITE, (INT, 2), (IDLE), (IDLE)
+	  25) DIV, (VAR, k), (INT, 0), (VAR, ##8)
+	  26) ATRIB, (VAR, ##8), (IDLE), (VAR, k)
+	  27) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  28) PARAM, (VAR, k), (IDLE), (IDLE)
+	  29) WRITE, (INT, 2), (IDLE), (IDLE)
+	  30) DIV, (INT, 0), (INT, 0), (VAR, ##9)
+	  31) ATRIB, (VAR, ##9), (IDLE), (VAR, k)
+	  32) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  33) PARAM, (VAR, k), (IDLE), (IDLE)
+	  34) WRITE, (INT, 2), (IDLE), (IDLE)
+	  35) DIV, (REAL, 1), (INT, 0), (VAR, ##10)
+	  36) ATRIB, (VAR, ##10), (IDLE), (VAR, x)
+	  37) PARAM, (CADEIA, x eh ), (IDLE), (IDLE)
+	  38) PARAM, (VAR, x), (IDLE), (IDLE)
+	  39) WRITE, (INT, 2), (IDLE), (IDLE)
+	  40) RESTO, (INT, 5), (VAR, letra), (VAR, ##11)
+	  41) ATRIB, (VAR, ##11), (IDLE), (VAR, k)
+	  42) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  43) PARAM, (VAR, k), (IDLE), (IDLE)
+	  44) WRITE, (INT, 2), (IDLE), (IDLE)
+	  45) RESTO, (INT, 5), (INT, 2), (VAR, ##12)
+	  46) ATRIB, (VAR, ##12), (IDLE), (VAR, k)
+	  47) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  48) PARAM, (VAR, k), (IDLE), (IDLE)
+	  49) WRITE, (INT, 2), (IDLE), (IDLE)
+	  50) RESTO, (INT, 1), (INT, 0), (VAR, ##13)
+	  51) ATRIB, (VAR, ##13), (IDLE), (VAR, k)
+	  52) PARAM, (CADEIA, k eh ), (IDLE), (IDLE)
+	  53) PARAM, (VAR, k), (IDLE), (IDLE)
+	  54) WRITE, (INT, 2), (IDLE), (IDLE)
+	  55) PARAM, (CADEIA, 1 < 2 eh ), (IDLE), (IDLE)
+	  56) LT, (INT, 1), (INT, 2), (VAR, ##14)
+	  57) PARAM, (VAR, ##14), (IDLE), (IDLE)
+	  58) WRITE, (INT, 2), (IDLE), (IDLE)
+	  59) PARAM, (CADEIA, 1 <= 2 eh ), (IDLE), (IDLE)
+	  60) LE, (INT, 1), (INT, 2), (VAR, ##15)
+	  61) PARAM, (VAR, ##15), (IDLE), (IDLE)
+	  62) WRITE, (INT, 2), (IDLE), (IDLE)
+	  63) PARAM, (CADEIA, 1 > 2 eh ), (IDLE), (IDLE)
+	  64) GT, (INT, 1), (INT, 2), (VAR, ##16)
+	  65) PARAM, (VAR, ##16), (IDLE), (IDLE)
+	  66) WRITE, (INT, 2), (IDLE), (IDLE)
+	  67) PARAM, (CADEIA, 1 >= 2 eh ), (IDLE), (IDLE)
+	  68) GE, (INT, 1), (INT, 2), (VAR, ##17)
+	  69) PARAM, (VAR, ##17), (IDLE), (IDLE)
+	  70) WRITE, (INT, 2), (IDLE), (IDLE)
+	  71) PARAM, (CADEIA, 1 == 1 eh ), (IDLE), (IDLE)
+	  72) EQ, (INT, 1), (INT, 1), (VAR, ##18)
+	  73) PARAM, (VAR, ##18), (IDLE), (IDLE)
+	  74) WRITE, (INT, 2), (IDLE), (IDLE)
+	  75) PARAM, (CADEIA, 1 != 2 eh ), (IDLE), (IDLE)
+	  76) NE, (INT, 1), (INT, 2), (VAR, ##19)
+	  77) PARAM, (VAR, ##19), (IDLE), (IDLE)
+	  78) WRITE, (INT, 2), (IDLE), (IDLE)
+	  79) PARAM, (CADEIA, !verdade eh ), (IDLE), (IDLE)
+	  80) NOT, (LOGIC, 1), (IDLE), (VAR, ##20)
+	  81) PARAM, (VAR, ##20), (IDLE), (IDLE)
+	  82) WRITE, (INT, 2), (IDLE), (IDLE)
+	  83) PARAM, (CADEIA, !(1>2) eh ), (IDLE), (IDLE)
+	  84) GT, (INT, 1), (INT, 2), (VAR, ##21)
+	  85) NOT, (VAR, ##21), (IDLE), (VAR, ##22)
+	  86) PARAM, (VAR, ##22), (IDLE), (IDLE)
+	  87) WRITE, (INT, 2), (IDLE), (IDLE)
+	  88) PARAM, (CADEIA, ~2 eh ), (IDLE), (IDLE)
+	  89) MENUN, (INT, 2), (IDLE), (VAR, ##23)
+	  90) PARAM, (VAR, ##23), (IDLE), (IDLE)
+	  91) WRITE, (INT, 2), (IDLE), (IDLE)
+	  92) OPRETURN, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+Modulo TestaExpressoes:
+
+   1) OPENMOD
+		Alocando as variaveis:
+			k: 1 elemento(s) alocado(s) 
+   2) OPCALL
+   3) EXIT
+
+Modulo Hello:
+
+   1) OPENMOD
+		Alocando as variaveis:
+   2) PARAM
+   3) WRITE
+		Escrevendo: 
+			Hello!!!
+
+   4) OPRETURN
+
+Modulo fatorial:
+
+   1) OPENMOD
+		Alocando as variaveis:
+			prod: 1 elemento(s) alocado(s) 
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			i: 1 elemento(s) alocado(s) 
+			n: 1 elemento(s) alocado(s) 
+   2) ATRIB
+   3) PARAM
+   4) NOP
+   5) LE
+   6) JF
+   7) NOP
+   8) MULT
+   9) ATRIB
+  10) NOP
+  11) MAIS
+  12) JUMP
+  13) NOP
+  14) OPRETURN
+
+Modulo ##principal:
+
+   1) OPENMOD
+		Alocando as variaveis:
+			x: 1 elemento(s) alocado(s) 
+			##10: 1 elemento(s) alocado(s) 
+			##20: 1 elemento(s) alocado(s) 
+			##11: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			letra: 1 elemento(s) alocado(s) 
+			##21: 1 elemento(s) alocado(s) 
+			##12: 1 elemento(s) alocado(s) 
+			##5: 1 elemento(s) alocado(s) 
+			##22: 1 elemento(s) alocado(s) 
+			##13: 1 elemento(s) alocado(s) 
+			##6: 1 elemento(s) alocado(s) 
+			##23: 1 elemento(s) alocado(s) 
+			##14: 1 elemento(s) alocado(s) 
+			##7: 1 elemento(s) alocado(s) 
+			##15: 1 elemento(s) alocado(s) 
+			##8: 1 elemento(s) alocado(s) 
+			##16: 1 elemento(s) alocado(s) 
+			##9: 1 elemento(s) alocado(s) 
+			##17: 1 elemento(s) alocado(s) 
+			##18: 1 elemento(s) alocado(s) 
+			##19: 1 elemento(s) alocado(s) 
+			n: 1 elemento(s) alocado(s) 
+   2) PARAM
+   3) PARAM
+   4) READ
+		Lendo... 
+
+   5) PARAM
+   6) PARAM
+   7) PARAM
+   8) PARAM
+   9) WRITE
+		Escrevendo: 
+			n eh 30 e letra eh A
+
+  10) PARAM
+  11) PARAM
+  12) WRITE
+		Escrevendo: 
+			k eh 0
+
+  13) MAIS
+  14) ATRIB
+  15) PARAM
+  16) PARAM
+  17) WRITE
+		Escrevendo: 
+			k eh 5
+
+  18) MULT
+  19) MULT
+  20) MAIS
+  21) ATRIB
+  22) PARAM
+  23) PARAM
+  24) WRITE
+		Escrevendo: 
+			k eh 35
+
+  25) DIV
+  26) ATRIB
+  27) PARAM
+  28) PARAM
+  29) WRITE
+		Escrevendo: 
+			k eh 2147483647
+
+  30) DIV
+  31) ATRIB
+  32) PARAM
+  33) PARAM
+  34) WRITE
+		Escrevendo: 
+			k eh 2147483647
+
+  35) DIV
+  36) ATRIB
+  37) PARAM
+  38) PARAM
+  39) WRITE
+		Escrevendo: 
+			x eh 3.40282e+038
+
+  40) RESTO
+  41) ATRIB
+  42) PARAM
+  43) PARAM
+  44) WRITE
+		Escrevendo: 
+			k eh 5
+
+  45) RESTO
+  46) ATRIB
+  47) PARAM
+  48) PARAM
+  49) WRITE
+		Escrevendo: 
+			k eh 1
+
+  50) RESTO
+  51) ATRIB
+  52) PARAM
+  53) PARAM
+  54) WRITE
+		Escrevendo: 
+			k eh 1
+
+  55) PARAM
+  56) LT
+  57) PARAM
+  58) WRITE
+		Escrevendo: 
+			1 < 2 eh VERDADE
+
+  59) PARAM
+  60) LE
+  61) PARAM
+  62) WRITE
+		Escrevendo: 
+			1 <= 2 eh VERDADE
+
+  63) PARAM
+  64) GT
+  65) PARAM
+  66) WRITE
+		Escrevendo: 
+			1 > 2 eh FALSO
+
+  67) PARAM
+  68) GE
+  69) PARAM
+  70) WRITE
+		Escrevendo: 
+			1 >= 2 eh FALSO
+
+  71) PARAM
+  72) EQ
+  73) PARAM
+  74) WRITE
+		Escrevendo: 
+			1 == 1 eh VERDADE
+
+  75) PARAM
+  76) NE
+  77) PARAM
+  78) WRITE
+		Escrevendo: 
+			1 != 2 eh VERDADE
+
+  79) PARAM
+  80) NOT
+  81) PARAM
+  82) WRITE
+		Escrevendo: 
+			!verdade eh FALSO
+
+  83) PARAM
+  84) GT
+  85) NOT
+  86) PARAM
+  87) WRITE
+		Escrevendo: 
+			!(1>2) eh VERDADE
+
+  88) PARAM
+  89) MENUN
+  90) PARAM
+  91) WRITE
+		Escrevendo: 
+			~2 eh -3
+
+  92) OPRETURN
